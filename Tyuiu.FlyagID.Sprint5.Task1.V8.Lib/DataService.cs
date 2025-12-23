@@ -14,28 +14,39 @@ namespace Tyuiu.FlyagID.Sprint5.Task1.V8.Lib
                 "OutPutFileTask1.txt"
             );
 
+            CultureInfo ru = CultureInfo.GetCultureInfo("ru-RU");
+
             using (StreamWriter writer = new StreamWriter(path))
             {
                 for (int x = startValue; x <= stopValue; x++)
                 {
-                    double result;
+                    double y;
 
                     if ((2 * x - 2) == 0)
                     {
-                        result = 0;
+                        y = 0;
                     }
                     else
                     {
-                        result = 4
-                               - 2 * x
-                               + (2 + Math.Cos(x)) / (2 * x - 2);
+                        y = 4
+                          - 2 * x
+                          + (2 + Math.Cos(x)) / (2 * x - 2);
                     }
 
-                    result = Math.Round(result, 2);
+                    y = Math.Round(y, 2);
 
-                    writer.WriteLine(
-                        result.ToString("0.00", CultureInfo.InvariantCulture)
-                    );
+                    string value;
+
+                    if (y % 1 == 0)
+                    {
+                        value = ((int)y).ToString();
+                    }
+                    else
+                    {
+                        value = y.ToString("0.##", ru);
+                    }
+
+                    writer.WriteLine(value);
                 }
             }
 
